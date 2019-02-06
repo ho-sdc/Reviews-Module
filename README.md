@@ -4,10 +4,8 @@
 
 ## Related Projects
 
-- https://github.com/teamName/repo
-- https://github.com/teamName/repo
-- https://github.com/teamName/repo
-- https://github.com/teamName/repo
+- https://github.com/team-barium/Nav-Bar-Module
+- https://github.com/team-barium/Suggestions-Module
 
 ## Table of Contents
 
