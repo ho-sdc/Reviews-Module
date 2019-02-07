@@ -1,8 +1,10 @@
-var mysql = require('mysql');
+const mongoose = require('mongoose');
 
-var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'review'
-});
+mongoose.connect('mongodb://localhost/reviews', { useNewUrlParser: true });
+
+const connection = mongoose.connection;
+
+connection.on('error', () => console.log('Connection error.'));
+connection.once('open', () => console.log('Connected to mongoDB.'));
+
+module.exports = connection;
