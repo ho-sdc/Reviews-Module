@@ -1,5 +1,0 @@
-DROP DATABASE IF EXISTS review;
-
-CREATE DATABASE review;
-
-USE review;
