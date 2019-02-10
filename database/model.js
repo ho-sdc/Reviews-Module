@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Review = new mongoose.Schema(
   {
     review_id: { type: Number, require: true },
+    user: { type: String, require: true },
     header: { type: String, require: true },
     description: { type: String, require: true },
     review_date: { type: String, require: true },

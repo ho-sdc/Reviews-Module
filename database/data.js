@@ -1,4 +1,5 @@
 const db = require('./model.js');
+const faker = require('faker');
 
 const {
   descriptionGenerator,
@@ -15,6 +16,7 @@ generateReviews = n => {
   for (let i = 0; i < n; i++) {
     let review = {
       review_id: idGenerator(20),
+      user: faker.internet.userName(),
       header: headerGenerator(),
       description: descriptionGenerator(),
       review_date: dateGenerator(),
