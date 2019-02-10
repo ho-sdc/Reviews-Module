@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'adineuePRO-Regular';
+  src: url('./fonts/adineuePRO-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'adineuePRO-Bold';
+  src: url('./fonts/adineuePRO-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'AdihausDIN-Regular';
+  src: url('./fonts/AdihausDIN-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'AdihausDIN-Bold';
+  src: url('./fonts/AdihausDIN-Bold.woff2') format('woff2');
+}
+
+.ratingsAndReviews {
+  font-family: adineuePRO-Bold;
+  font-weight: 600;
+  font-size: 36px;
+  padding-bottom: 70px;
+}
+
+.columns {
+  display: flex;
+  flex-direction: row;
+}

@@ -1,0 +1,14 @@
+.scoreContainer {
+  display: flex;
+  flex-direction: row;
+  background-color: #2ada71;
+}
+
+.score {
+  font-size: 56px;
+}
+
+.progressBar {
+  display: flex;
+  flex-direction: row;
+}

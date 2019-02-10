@@ -1,0 +1,20 @@
+.filterButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.relevant {
+  border-style: solid;
+  border-color: black;
+}
+
+.helpful {
+  border-style: solid;
+  border-color: black;
+}
+
+.newest {
+  border-style: solid;
+  border-color: black;
+}

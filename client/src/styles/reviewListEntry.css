@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'adineuePRO-Regular';
+  src: url('./fonts/adineuePRO-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'adineuePRO-Bold';
+  src: url('./fonts/adineuePRO-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'AdihausDIN-Regular';
+  src: url('./fonts/AdihausDIN-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'AdihausDIN-Bold';
+  src: url('./fonts/AdihausDIN-Bold.woff2') format('woff2');
+}
+
+.feedTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.date {
+  font-family: AdihausDIN-Regular;
+  font-size: 14px;
+  color: #767677;
+}
+
+.header {
+  font-family: 'adineuePRO-Bold';
+  font-size: 20px;
+}
+
+.bottomEntry {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
