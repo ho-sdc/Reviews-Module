@@ -5,17 +5,7 @@ import styles from '../styles/reviewListEntry.css';
 class ReviewsListEntry extends Component {
   constructor(props) {
     super(props);
-    // this.recommendChecker = this.recommendChecker.bind(this);
   }
-
-  // recommendChecker() {
-  //   console.log('in here', this.props.review.rating);
-  //   if (this.props.rating >= 4) {
-  //     return <div>I recommend this product</div>;
-  //   } else {
-  //     return <div />;
-  //   }
-  // }
 
   render() {
     return (
@@ -39,7 +29,6 @@ class ReviewsListEntry extends Component {
         </div>
         <br />
         <div className={styles.userContainer}>
-          {/* <div>{this.recommendChecker()}</div> */}
           <div className={styles.user}>{this.props.review.user}</div>
           <div className={styles.verified}> - Verified Purchaser</div>
         </div>

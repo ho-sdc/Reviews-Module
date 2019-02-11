@@ -18,6 +18,11 @@
   src: url('./fonts/AdihausDIN-Bold.woff2') format('woff2');
 }
 
+.container {
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
 .ratingsAndReviews {
   font-family: adineuePRO-Bold;
   font-weight: 600;
@@ -28,4 +33,12 @@
 .columns {
   display: flex;
   flex-direction: row;
+}
+
+.sortOn {
+  font-family: AdihausDIN-Regular;
+  font-size: 13px;
+  line-height: 17px;
+  letter-spacing: 2px;
+  padding-bottom: 10px;
 }

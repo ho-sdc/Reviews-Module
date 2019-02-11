@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from '../styles/filter.css';
+import styles from '../styles/filters.css';
 
-const Filter = props => {
+const Filters = props => {
   return (
     <div>
       <div className={styles.filterButtons}>
@@ -12,4 +12,4 @@ const Filter = props => {
     </div>
   );
 };
-export default Filter;
+export default Filters;

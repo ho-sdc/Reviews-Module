@@ -1,14 +1,74 @@
+@font-face {
+  font-family: 'adineuePRO-Regular';
+  src: url('./fonts/adineuePRO-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'adineuePRO-Bold';
+  src: url('./fonts/adineuePRO-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'AdihausDIN-Regular';
+  src: url('./fonts/AdihausDIN-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'AdihausDIN-Bold';
+  src: url('./fonts/AdihausDIN-Bold.woff2') format('woff2');
+}
+
+.container {
+  width: 30%;
+}
+
 .scoreContainer {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   background-color: #2ada71;
 }
 
 .score {
+  font-family: 'adineuePRO-Bold';
   font-size: 56px;
+  padding-right: 10px;
 }
 
 .progressBar {
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.subScore {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reviews {
+  display: flex;
+  flex-direction: row;
+}
+
+.reviewsNumber {
+  font-family: AdihausDIN-Bold;
+  font-size: 16px;
+  padding-right: 5px;
+}
+
+.reviewsTag {
+  font-family: AdihausDIN-Regular;
+  font-size: 16px;
+}
+
+.ratingBreakdown {
+  font-family: AdihausDIN-Bold;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  margin-top: 17px;
+  margin-bottom: 17px;
 }
