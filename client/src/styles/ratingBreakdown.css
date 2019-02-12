@@ -18,10 +18,6 @@
   src: url('./fonts/AdihausDIN-Bold.woff2') format('woff2');
 }
 
-.container {
-  width: 30%;
-}
-
 .scoreContainer {
   display: flex;
   flex-direction: row;
@@ -71,4 +67,44 @@
   letter-spacing: 1.5px;
   margin-top: 17px;
   margin-bottom: 17px;
+}
+
+.starCategory {
+  font-family: AdihausDIN-Bold;
+  font-size: 13px;
+  white-space: nowrap;
+  text-decoration: underline;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.starCategory:hover {
+  color: white;
+  background-color: black;
+}
+
+.numOfReviews {
+  font-family: AdihausDIN-Regular;
+  letter-spacing: 2px;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+progress {
+  padding-left: 5px;
+  padding-right: 5px;
+  -webkit-appearance: none;
+  height: 4px;
+}
+
+hr {
+  color: red;
+}
+
+::-webkit-progress-bar {
+  background-color: lightgrey;
+}
+
+::-webkit-progress-value {
+  background-color: #2ada71;
 }

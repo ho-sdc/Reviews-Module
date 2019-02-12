@@ -9,7 +9,7 @@ class RatingBreakdown extends Component {
 
   render() {
     return (
-      <div className={styles.container}>
+      <div>
         <div className={styles.scoreContainer}>
           <div className={styles.score}>{this.props.score}</div>
           <div className={styles.subScore}>
@@ -30,31 +30,32 @@ class RatingBreakdown extends Component {
         <div className={styles.ratingBreakdown}>RATING BREAKDOWN</div>
         <div>
           <div className={styles.progressBar}>
-            <div>5 STARS</div>
+            <div className={styles.starCategory}>5 STARS</div>
             <progress value={this.props.five} max={this.props.max} />
-            <div>{this.props.five}</div>
+            <div className={styles.numOfReviews}>{this.props.five}</div>
           </div>
           <div className={styles.progressBar}>
-            <div>4 STARS</div>
+            <div className={styles.starCategory}>4 STARS</div>
             <progress value={this.props.four} max={this.props.max} />
-            <div>{this.props.four}</div>
+            <div className={styles.numOfReviews}>{this.props.four}</div>
           </div>
           <div className={styles.progressBar}>
-            <div>3 STARS</div>
+            <div className={styles.starCategory}>3 STARS</div>
             <progress value={this.props.three} max={this.props.max} />
-            <div>{this.props.three}</div>
+            <div className={styles.numOfReviews}>{this.props.three}</div>
           </div>
           <div className={styles.progressBar}>
-            <div>2 STARS</div>
+            <div className={styles.starCategory}>2 STARS</div>
             <progress value={this.props.two} max={this.props.max} />
-            <div>{this.props.two}</div>
+            <div className={styles.numOfReviews}>{this.props.two}</div>
           </div>
           <div className={styles.progressBar}>
-            <div>1 STARS</div>
+            <div className={styles.starCategory}>1 STARS</div>
             <progress value={this.props.one} max={this.props.max} />
-            <div>{this.props.one}</div>
+            <div className={styles.numOfReviews}>{this.props.one}</div>
           </div>
         </div>
+        <hr />
       </div>
     );
   }

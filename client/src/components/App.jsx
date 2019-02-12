@@ -62,17 +62,19 @@ class App extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.ratingsAndReviews}>RATINGS & REVIEWS</div>
-        <div className={styles.columns}>
-          <RatingBreakdown
-            reviews={this.state.reviews}
-            score={this.state.score}
-            five={this.state.five}
-            four={this.state.four}
-            three={this.state.three}
-            two={this.state.two}
-            one={this.state.one}
-            max={this.state.max}
-          />
+        <div className={styles.row}>
+          <div className={styles.leftContainer}>
+            <RatingBreakdown
+              reviews={this.state.reviews}
+              score={this.state.score}
+              five={this.state.five}
+              four={this.state.four}
+              three={this.state.three}
+              two={this.state.two}
+              one={this.state.one}
+              max={this.state.max}
+            />
+          </div>
           <div>
             <div className={styles.sortOn}>SORT ON</div>
             <Filters />
