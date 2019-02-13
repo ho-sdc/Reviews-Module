@@ -5,10 +5,13 @@ import styles from '../styles/app.css';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import axios from 'axios';
 
+let id = Math.floor(Math.random() * 20) + 1;
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: null,
       reviews: [],
       score: 0,
       five: 0,
@@ -18,10 +21,13 @@ class App extends Component {
       one: 0,
       max: 0
     };
+    this.filterByRelevant = this.filterByRelevant.bind(this);
+    this.filterByHelpful = this.filterByHelpful.bind(this);
+    this.filterByNewest = this.filterByNewest.bind(this);
   }
 
   componentDidMount() {
-    this.fetchReviews(Math.floor(Math.random() * 20) + 1);
+    this.fetchReviews(id);
   }
 
   fetchReviews(id) {
@@ -30,6 +36,7 @@ class App extends Component {
       .then(({ data }) => this.setState({ reviews: data }))
       .then(() => this.calculateAverage())
       .then(() => this.meter())
+      .then(() => this.setState({ id }))
       .catch(error => console.error(error));
   }
 
@@ -45,6 +52,27 @@ class App extends Component {
   filterReviewScores(n, array) {
     let ratings = array.filter(number => number === n);
     return ratings.length;
+  }
+
+  filterByRelevant() {
+    axios
+      .get(`/reviews/${id}/relevant`)
+      .then(({ data }) => this.setState({ reviews: data }))
+      .catch(error => console.error(error));
+  }
+
+  filterByHelpful() {
+    axios
+      .get(`/reviews/${id}/helpful`)
+      .then(({ data }) => this.setState({ reviews: data }))
+      .catch(error => console.error(error));
+  }
+
+  filterByNewest() {
+    axios
+      .get(`/reviews/${id}/newest`)
+      .then(({ data }) => this.setState({ reviews: data }))
+      .catch(error => console.error(error));
   }
 
   meter() {
@@ -77,7 +105,11 @@ class App extends Component {
           </div>
           <div>
             <div className={styles.sortOn}>SORT ON</div>
-            <Filters />
+            <Filters
+              filterByHelpful={this.filterByHelpful}
+              filterByRelevant={this.filterByRelevant}
+              filterByNewest={this.filterByNewest}
+            />
             <Reviews reviews={this.state.reviews} />
           </div>
         </div>

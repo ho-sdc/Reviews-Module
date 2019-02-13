@@ -5,9 +5,18 @@ const Filters = props => {
   return (
     <div>
       <div className={styles.filterButtons}>
-        <div className={styles.relevant}>RELEVANT</div>
-        <div className={styles.helpful}>HELPFUL</div>
-        <div className={styles.newest}>NEWEST</div>
+        <div
+          onClick={() => props.filterByRelevant()}
+          className={styles.relevant}
+        >
+          RELEVANT
+        </div>
+        <div onClick={() => props.filterByHelpful()} className={styles.helpful}>
+          HELPFUL
+        </div>
+        <div onClick={() => props.filterByNewest()} className={styles.newest}>
+          NEWEST
+        </div>
       </div>
     </div>
   );
