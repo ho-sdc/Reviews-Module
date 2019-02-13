@@ -7,7 +7,8 @@ const {
   idGenerator,
   fiveStarGenerator,
   dateGenerator,
-  recommendGen
+  recommendGen,
+  helpfulCountGen
 } = require('./generator.js');
 
 let reviews = [];
@@ -19,13 +20,15 @@ generateReviews = n => {
       user: faker.internet.userName(),
       header: headerGenerator(),
       description: descriptionGenerator(),
-      review_date: dateGenerator(),
+      date: dateGenerator(),
       rating: fiveStarGenerator(),
       size: fiveStarGenerator(),
       width: fiveStarGenerator(),
       comfort: fiveStarGenerator(),
       quality: fiveStarGenerator(),
-      recommended: recommendGen()
+      recommended: recommendGen(),
+      yes: helpfulCountGen(),
+      nope: helpfulCountGen()
     };
     reviews.push(review);
   }

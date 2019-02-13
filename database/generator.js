@@ -30,30 +30,20 @@ let fiveStarGenerator = () => {
   return Math.floor(Math.random() * Math.floor(5) + 1);
 };
 
-let dateGenerator = () => {
-  let months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
-  let days = [...Array(32).keys()].slice(1);
-  let years = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
+let year = (min, max) => Math.floor(Math.random() * (max - min) + min);
+let day = () => Math.floor(Math.random() * 31 + 1);
+let month = () => Math.floor(Math.random() * 12 + 1);
 
-  let getItem = array => array[Math.floor(Math.random() * array.length)];
-  return `${getItem(months)} ${getItem(days)}, ${getItem(years)}`;
+let dateGenerator = () => {
+  return new Date(year(2010, 2020), month(), day());
 };
 
 let recommendGen = () => {
   return Math.random() >= 0.5;
+};
+
+let helpfulCountGen = () => {
+  return Math.floor(Math.random() * Math.floor(100) + 1);
 };
 
 module.exports = {
@@ -62,5 +52,6 @@ module.exports = {
   idGenerator,
   fiveStarGenerator,
   dateGenerator,
-  recommendGen
+  recommendGen,
+  helpfulCountGen
 };
