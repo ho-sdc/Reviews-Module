@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Reviews from './Reviews.jsx';
 import Filters from './Filters.jsx';
+import Feedback from './Feedback.jsx';
 import styles from '../styles/app.css';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import axios from 'axios';
@@ -13,6 +14,7 @@ class App extends Component {
     this.state = {
       id: null,
       reviews: [],
+      percentage: 0,
       score: 0,
       five: 0,
       four: 0,
@@ -36,6 +38,7 @@ class App extends Component {
       .then(({ data }) => this.setState({ reviews: data }))
       .then(() => this.calculateAverage())
       .then(() => this.meter())
+      .then(() => this.calculateRecommendations())
       .then(() => this.setState({ id }))
       .catch(error => console.error(error));
   }
@@ -47,6 +50,19 @@ class App extends Component {
     let sum = ratings.reduce(getSum);
     let avg = sum / numberOfRatings;
     this.setState({ score: avg });
+  }
+
+  calculateRecommendations() {
+    let recommendations = this.state.reviews.map(review => review.recommended);
+    let total = recommendations.length;
+    let yes = 0;
+
+    recommendations.forEach(recommendation => {
+      if (recommendation === true) yes++;
+    });
+
+    let percentage = (yes / total) * 100;
+    this.setState({ percentage });
   }
 
   filterReviewScores(n, array) {
@@ -102,6 +118,7 @@ class App extends Component {
               one={this.state.one}
               max={this.state.max}
             />
+            <Feedback percentage={this.state.percentage} />
           </div>
           <div>
             <div className={styles.sortOn}>SORT ON</div>
