@@ -14,6 +14,7 @@ class App extends Component {
     this.state = {
       id: null,
       reviews: [],
+      n: 0,
       percentage: 0,
       score: 0,
       five: 0,
@@ -21,7 +22,11 @@ class App extends Component {
       three: 0,
       two: 0,
       one: 0,
-      max: 0
+      max: 0,
+      size: 0,
+      width: 0,
+      comfort: 0,
+      quality: 0
     };
     this.filterByRelevant = this.filterByRelevant.bind(this);
     this.filterByHelpful = this.filterByHelpful.bind(this);
@@ -39,6 +44,7 @@ class App extends Component {
       .then(() => this.calculateAverage())
       .then(() => this.meter())
       .then(() => this.calculateRecommendations())
+      .then(() => this.userFeedback())
       .then(() => this.setState({ id }))
       .catch(error => console.error(error));
   }
@@ -102,6 +108,19 @@ class App extends Component {
     this.setState({ five, four, three, two, one, max });
   }
 
+  userFeedback() {
+    let { reviews } = this.state;
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let n = reviews.length;
+
+    let size = reviews.map(review => review.size).reduce(reducer) / n;
+    let width = reviews.map(review => review.width).reduce(reducer) / n;
+    let comfort = reviews.map(review => review.comfort).reduce(reducer) / n;
+    let quality = reviews.map(review => review.quality).reduce(reducer) / n;
+
+    this.setState({ size, width, comfort, quality, n });
+  }
+
   render() {
     return (
       <div className={styles.container}>
@@ -118,7 +137,14 @@ class App extends Component {
               one={this.state.one}
               max={this.state.max}
             />
-            <Feedback percentage={this.state.percentage} />
+            <Feedback
+              percentage={this.state.percentage}
+              size={this.state.size}
+              width={this.state.width}
+              comfort={this.state.comfort}
+              quality={this.state.quality}
+              n={this.state.n}
+            />
           </div>
           <div>
             <div className={styles.sortOn}>SORT ON</div>
