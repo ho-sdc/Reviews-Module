@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Reviews from './Reviews.jsx';
 import Filters from './Filters.jsx';
 import Feedback from './Feedback.jsx';
+import Buttons from './Buttons.jsx';
 import styles from '../styles/app.css';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import axios from 'axios';
@@ -14,6 +15,7 @@ class App extends Component {
     this.state = {
       id: null,
       count: 0,
+      reviewsOnDisplay: 2,
       reviews: [],
       n: 0,
       percentage: 0,
@@ -32,6 +34,7 @@ class App extends Component {
     this.filterByRelevant = this.filterByRelevant.bind(this);
     this.filterByHelpful = this.filterByHelpful.bind(this);
     this.filterByNewest = this.filterByNewest.bind(this);
+    this.loadMoreReviews = this.loadMoreReviews.bind(this);
   }
 
   componentDidMount() {
@@ -86,23 +89,38 @@ class App extends Component {
   }
 
   filterByRelevant() {
+    let { id, reviewsOnDisplay } = this.state;
     axios
-      .get(`/reviews/${id}/relevant`)
+      .get(`/reviews/${id}/relevant/${reviewsOnDisplay}`)
       .then(({ data }) => this.setState({ reviews: data }))
       .catch(error => console.error(error));
   }
 
   filterByHelpful() {
+    let { id, reviewsOnDisplay } = this.state;
     axios
-      .get(`/reviews/${id}/helpful`)
+      .get(`/reviews/${id}/helpful/${reviewsOnDisplay}`)
       .then(({ data }) => this.setState({ reviews: data }))
       .catch(error => console.error(error));
   }
 
   filterByNewest() {
+    let { id, reviewsOnDisplay } = this.state;
     axios
-      .get(`/reviews/${id}/newest`)
+      .get(`/reviews/${id}/newest/${reviewsOnDisplay}`)
       .then(({ data }) => this.setState({ reviews: data }))
+      .catch(error => console.error(error));
+  }
+
+  loadMoreReviews() {
+    axios
+      .get(`/reviews/${id}/more`)
+      .then(({ data }) =>
+        this.setState({ reviews: [...this.state.reviews, ...data] })
+      )
+      .then(() =>
+        this.setState({ reviewsOnDisplay: this.state.reviews.length })
+      )
       .catch(error => console.error(error));
   }
 
@@ -163,6 +181,7 @@ class App extends Component {
               filterByNewest={this.filterByNewest}
             />
             <Reviews reviews={this.state.reviews} />
+            <Buttons loadMoreReviews={this.loadMoreReviews} />
           </div>
         </div>
       </div>
