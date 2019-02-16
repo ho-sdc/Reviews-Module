@@ -13,6 +13,7 @@ class App extends Component {
     super(props);
     this.state = {
       id: null,
+      count: 0,
       reviews: [],
       n: 0,
       percentage: 0,
@@ -41,11 +42,19 @@ class App extends Component {
     axios
       .get(`/reviews/${id}`)
       .then(({ data }) => this.setState({ reviews: data }))
+      .then(() => this.fetchReviewCount(id))
       .then(() => this.calculateAverage())
       .then(() => this.meter())
       .then(() => this.calculateRecommendations())
       .then(() => this.userFeedback())
       .then(() => this.setState({ id }))
+      .catch(error => console.error(error));
+  }
+
+  fetchReviewCount(id) {
+    axios
+      .get(`/reviews/${id}/total`)
+      .then(({ data }) => this.setState({ count: data }))
       .catch(error => console.error(error));
   }
 
@@ -128,7 +137,7 @@ class App extends Component {
         <div className={styles.row}>
           <div className={styles.leftContainer}>
             <RatingBreakdown
-              reviews={this.state.reviews}
+              count={this.state.count}
               score={this.state.score}
               five={this.state.five}
               four={this.state.four}

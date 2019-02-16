@@ -76,6 +76,7 @@
 .reply:hover {
   color: white;
   background-color: black;
+  cursor: pointer;
 }
 
 .helpful {
@@ -97,6 +98,7 @@
 .yes:hover {
   color: white;
   background-color: black;
+  cursor: pointer;
 }
 
 .no {
@@ -109,6 +111,7 @@
 .no:hover {
   color: white;
   background-color: black;
+  cursor: pointer;
 }
 
 .yesCount {

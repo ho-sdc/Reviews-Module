@@ -20,9 +20,7 @@ class RatingBreakdown extends Component {
               starRatedColor="black"
             />
             <div className={styles.reviews}>
-              <div className={styles.reviewsNumber}>
-                {this.props.reviews.length}
-              </div>
+              <div className={styles.reviewsNumber}>{this.props.count}</div>
               <div className={styles.reviewsTag}>Reviews</div>
             </div>
           </div>

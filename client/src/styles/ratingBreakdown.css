@@ -37,6 +37,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+  margin-bottom: 15px;
 }
 
 .subScore {
@@ -81,6 +82,7 @@
 .starCategory:hover {
   color: white;
   background-color: black;
+  cursor: pointer;
 }
 
 .numOfReviews {
