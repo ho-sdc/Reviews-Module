@@ -1,9 +1,16 @@
 import React from 'react';
+import styles from '../styles/buttons.css';
 
 const Buttons = props => {
   return (
-    <div>
-      <button onClick={() => props.loadMoreReviews()}>LOAD MORE</button>
+    <div className={styles.container}>
+      <div
+        onClick={() => props.loadMoreReviews()}
+        className={styles.loadContainer}
+      >
+        <div className={styles.load}>LOAD MORE</div>
+        <div className={styles.arrow}>&#10230;</div>
+      </div>
     </div>
   );
 };

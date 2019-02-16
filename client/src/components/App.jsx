@@ -17,7 +17,7 @@ class App extends Component {
       count: 0,
       reviewsOnDisplay: 2,
       reviews: [],
-      stats: [],
+      // stats: [{ nope: 0, yes: 0, size: 0, width: 0, quality: 0, comfort: 0 }],
       n: 0,
       percentage: 0,
       score: 0,
@@ -46,7 +46,7 @@ class App extends Component {
     axios
       .get(`/reviews/${id}`)
       .then(({ data }) => this.setState({ reviews: data }))
-      .then(() => this.fetchStats(id))
+      // .then(() => this.fetchStats(id))
       .then(() => this.fetchReviewCount(id))
       .then(() => this.calculateAverage())
       .then(() => this.meter())
@@ -63,12 +63,12 @@ class App extends Component {
       .catch(error => console.error(error));
   }
 
-  fetchStats(id) {
-    axios
-      .get(`/reviews/${id}/stats`)
-      .then(({ data }) => this.setState({ stats: data }))
-      .then(error => console.error(error));
-  }
+  // fetchStats(id) {
+  //   axios
+  //     .get(`/reviews/${id}/stats`)
+  //     .then(({ data }) => console.log(data))
+  //     .then(error => console.error(error));
+  // }
 
   calculateAverage() {
     let ratings = this.state.reviews.map(review => review.rating);
