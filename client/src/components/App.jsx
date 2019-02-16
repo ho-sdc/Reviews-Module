@@ -17,6 +17,7 @@ class App extends Component {
       count: 0,
       reviewsOnDisplay: 2,
       reviews: [],
+      stats: [],
       n: 0,
       percentage: 0,
       score: 0,
@@ -38,13 +39,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchReviews(id);
+    this.onStartUp(id);
   }
 
-  fetchReviews(id) {
+  onStartUp(id) {
     axios
       .get(`/reviews/${id}`)
       .then(({ data }) => this.setState({ reviews: data }))
+      .then(() => this.fetchStats(id))
       .then(() => this.fetchReviewCount(id))
       .then(() => this.calculateAverage())
       .then(() => this.meter())
@@ -59,6 +61,13 @@ class App extends Component {
       .get(`/reviews/${id}/total`)
       .then(({ data }) => this.setState({ count: data }))
       .catch(error => console.error(error));
+  }
+
+  fetchStats(id) {
+    axios
+      .get(`/reviews/${id}/stats`)
+      .then(({ data }) => this.setState({ stats: data }))
+      .then(error => console.error(error));
   }
 
   calculateAverage() {

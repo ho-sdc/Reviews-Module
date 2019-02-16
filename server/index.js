@@ -13,14 +13,6 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.listen(port, () => console.log(`Listening on port ${port}.`));
 
-app.get('/reviews/:review_id/total', (req, res) => {
-  let { review_id } = req.params;
-  Reviews.find({ review_id })
-    .countDocuments()
-    .then(data => res.status(200).send(data.toString()))
-    .catch(error => res.status(404).end(error));
-});
-
 app.get('/reviews/:review_id', (req, res) => {
   let { review_id } = req.params;
   Reviews.find({ review_id })
@@ -28,6 +20,21 @@ app.get('/reviews/:review_id', (req, res) => {
     .limit(2)
     .then(data => res.status(200).send(data))
     .catch(error => res.status(404).send(error));
+});
+
+app.get('/reviews/:review_id/stats', (req, res) => {
+  let { review_id } = req.params;
+  Reviews.find({ review_id })
+    .then(data => res.status(200).send(data))
+    .catch(error => res.status(404).send(error));
+});
+
+app.get('/reviews/:review_id/total', (req, res) => {
+  let { review_id } = req.params;
+  Reviews.find({ review_id })
+    .countDocuments()
+    .then(data => res.status(200).send(data.toString()))
+    .catch(error => res.status(404).end(error));
 });
 
 app.get('/reviews/:review_id/helpful/:n', (req, res) => {
