@@ -42,16 +42,76 @@ class Feedback extends Component {
           of customers recommend this product
         </div>
         <br />
-        <div id="container" className={styles.container}>
-          <div className={styles.meter} />
-          <div className={styles.meter} />
-          <div className={styles.meter} />
-          <div className={styles.meter} />
+        <div>
+          <div className={styles.tag}>SIZE</div>
+          <div id="container" className={styles.container}>
+            <div className={styles.meter} />
+            <div className={styles.meter} />
+            <div className={styles.meter} />
+            <div className={styles.meter} />
+          </div>
+          <div
+            className={styles.triangle}
+            style={{ left: this.conversion(sizeAvg, length) }}
+          />
+          <div className={styles.tag2Div}>
+            <div className={styles.tag2}>TOO SMALL</div>
+            <div className={styles.tag2}>PERFECT</div>
+            <div className={styles.tag2}>TOO LARGE</div>
+          </div>
         </div>
-        <div
-          className={styles.triangle}
-          style={{ left: this.conversion(sizeAvg, length) }}
-        />
+        <div>
+          <div className={styles.tag}>WIDTH</div>
+          <div id="container" className={styles.container}>
+            <div className={styles.meter} />
+            <div className={styles.meter} />
+            <div className={styles.meter} />
+            <div className={styles.meter} />
+          </div>
+          <div
+            className={styles.triangle}
+            style={{ left: this.conversion(widthAvg, length) }}
+          />
+          <div className={styles.tag2Div}>
+            <div className={styles.tag2}>TOO NARROW</div>
+            <div className={styles.tag2}>PERFECT</div>
+            <div className={styles.tag2}>TOO WIDE</div>
+          </div>
+        </div>
+        <div>
+          <div className={styles.tag}>COMFORT</div>
+          <div id="container" className={styles.container}>
+            <div className={styles.meter} />
+            <div className={styles.meter} />
+            <div className={styles.meter} />
+            <div className={styles.meter} />
+          </div>
+          <div
+            className={styles.triangle}
+            style={{ left: this.conversion(comfortAvg, length) }}
+          />
+          <div className={styles.tag2Div}>
+            <div className={styles.tag2}>UNCOMFORTABLE</div>
+            <div className={styles.tag2}>COMFORTABLE</div>
+          </div>
+        </div>
+        <div>
+          <div className={styles.tag}>QUALITY</div>
+          <div id="container" className={styles.container}>
+            <div className={styles.meter} />
+            <div className={styles.meter} />
+            <div className={styles.meter} />
+            <div className={styles.meter} />
+          </div>
+          <div
+            className={styles.triangle}
+            style={{ left: this.conversion(qualityAvg, length) }}
+          />
+          <div className={styles.tag2Div}>
+            <div className={styles.tag2}>POOR</div>
+            <div className={styles.tag2}>PERFECT</div>
+          </div>
+        </div>
       </div>
     );
   }
