@@ -12,7 +12,7 @@ const Buttons = props => {
         <div className={styles.arrow}>&#10230;</div>
       </div>
       <div className={styles.container2}>
-        <div className={styles.write2}>WRITE A REVIEW &#10230;</div>
+        <div className={styles.write}>WRITE A REVIEW &#10230;</div>
       </div>
     </div>
   );

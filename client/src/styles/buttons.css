@@ -59,7 +59,7 @@
   cursor: pointer;
 }
 
-.write2 {
+.write {
   font-family: 'AdihausDIN-Bold';
   font-size: 13px;
   font-weight: 700;
@@ -76,6 +76,6 @@
   line-height: 50px;
 }
 
-.write2:hover {
+.write:hover {
   color: #767677;
 }
