@@ -41,7 +41,7 @@ class RatingBreakdown extends Component {
     let ratings = this.props.reviews.map(review => review.rating);
     let numberOfRatings = ratings.length;
     let sum = _.sum(ratings);
-    let score = sum / numberOfRatings;
+    let score = Math.round(10 * (sum / numberOfRatings)) / 10;
     if (isNaN(score)) return 0;
     this.setState({ score });
   }

@@ -7,22 +7,13 @@ import styles from '../styles/app.css';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import axios from 'axios';
 
-// let id = Math.floor(Math.random() * 20) + 1;
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: null,
+      id: 1,
       reviewsOnDisplay: 2,
-      reviews: [],
-      stats: [],
-      n: 0,
-      percentage: 0,
-      size: 0,
-      width: 0,
-      comfort: 0,
-      quality: 0
+      reviews: []
     };
     this.filterByRelevant = this.filterByRelevant.bind(this);
     this.filterByHelpful = this.filterByHelpful.bind(this);
@@ -37,41 +28,11 @@ class App extends Component {
   onStartUp(id) {
     axios
       .get(`/reviews/${id}`)
-      .then(({ data }) => this.setState({ reviews: data, id }))
-      .then(() => this.calculatePercentage())
-      .then(() => this.userFeedback())
+      .then(({ data }) => this.setState({ reviews: data }))
+      .then(() => this.setState({ id }))
       .catch(error => console.error(error));
   }
 
-  calculatePercentage() {
-    let recommendations = this.state.reviews.map(review => review.recommended);
-    let total = recommendations.length;
-    let count = 0;
-
-    recommendations.forEach(recommendation => {
-      if (recommendation === true) count++;
-    });
-
-    let percentage = (count / total) * 100;
-    this.setState({ percentage });
-  }
-
-  //////////////////USER FEEDBACK ////////////////////////////////////
-  userFeedback() {
-    let { reviews } = this.state;
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    let n = reviews.length;
-
-    let size = reviews.map(review => review.size).reduce(reducer) / n;
-    let width = reviews.map(review => review.width).reduce(reducer) / n;
-    let comfort = reviews.map(review => review.comfort).reduce(reducer) / n;
-    let quality = reviews.map(review => review.quality).reduce(reducer) / n;
-
-    this.setState({ size, width, comfort, quality, n });
-  }
-  //////////////////USER FEEDBACK ////////////////////////////////////
-
-  /////////////////// FILTERS ///////////////////////////////////////
   filterByRelevant() {
     let { id, reviewsOnDisplay } = this.state;
     axios
@@ -97,14 +58,12 @@ class App extends Component {
   }
 
   loadMoreReviews() {
+    let { id, reviews } = this.state;
+    let reviewsOnDisplay = reviews.length;
     axios
       .get(`/reviews/${id}/more`)
-      .then(({ data }) =>
-        this.setState({ reviews: [...this.state.reviews, ...data] })
-      )
-      .then(() =>
-        this.setState({ reviewsOnDisplay: this.state.reviews.length })
-      )
+      .then(({ data }) => this.setState({ reviews: [...reviews, ...data] }))
+      .then(() => this.setState({ reviewsOnDisplay }))
       .catch(error => console.error(error));
   }
 
@@ -115,14 +74,7 @@ class App extends Component {
         <div className={styles.row}>
           <div className={styles.leftContainer}>
             <RatingBreakdown id={this.state.id} reviews={this.state.reviews} />
-            <Feedback
-              percentage={this.state.percentage}
-              size={this.state.size}
-              width={this.state.width}
-              comfort={this.state.comfort}
-              quality={this.state.quality}
-              n={this.state.n}
-            />
+            <Feedback reviews={this.state.reviews} />
           </div>
           <div>
             <div className={styles.sortOn}>SORT ON</div>
