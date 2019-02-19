@@ -27,21 +27,19 @@ class App extends Component {
   }
 
   onStartUp(id) {
-    this.setState({ id: id });
-    axios
-      .get(`/reviews/${id}`)
-      .then(({ data }) => {
-        this.setState({ reviews: data });
+    Promise.all([
+      axios.get(`/reviews/${id}`),
+      axios.get(`/reviews/${id}/stats`)
+    ])
+      .then(([data1, data2]) => {
+        this.setState({
+          id: id,
+          reviews: data1.data,
+          stats: data2.data
+        });
       })
       .catch(error => console.error(error));
   }
-
-  // getStats(id) {
-  //   axios
-  //     .get(`/reviews/${id}/stats`)
-  //     .then(({ data }) => this.setState({ stats: data }))
-  //     .then(error => console.error(error));
-  // }
 
   filterByRelevant() {
     let { id, reviewsOnDisplay } = this.state;
@@ -78,13 +76,14 @@ class App extends Component {
   }
 
   render() {
+    let { id, stats, reviews } = this.state;
     return (
       <div className={styles.container}>
         <div className={styles.ratingsAndReviews}>RATINGS & REVIEWS</div>
         <div className={styles.row}>
           <div className={styles.leftContainer}>
-            <RatingBreakdown id={this.state.id} reviews={this.state.reviews} />
-            <Feedback reviews={this.state.reviews} />
+            <RatingBreakdown id={id} reviews={stats} />
+            <Feedback reviews={stats} />
           </div>
           <div>
             <div className={styles.sortOn}>SORT ON</div>
@@ -93,7 +92,7 @@ class App extends Component {
               filterByRelevant={this.filterByRelevant}
               filterByNewest={this.filterByNewest}
             />
-            <Reviews reviews={this.state.reviews} />
+            <Reviews reviews={reviews} />
             <Buttons loadMoreReviews={this.loadMoreReviews} />
           </div>
         </div>

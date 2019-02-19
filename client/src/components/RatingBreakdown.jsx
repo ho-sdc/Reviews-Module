@@ -20,9 +20,11 @@ class RatingBreakdown extends Component {
   }
 
   componentWillReceiveProps() {
-    this.fetchReviewCount();
-    this.meter();
-    this.calculateAverage();
+    setTimeout(() => {
+      this.fetchReviewCount();
+      this.meter();
+      this.calculateAverage();
+    }, 0);
   }
 
   fetchReviewCount() {
