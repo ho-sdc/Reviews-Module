@@ -67,11 +67,12 @@ class App extends Component {
 
   loadMoreReviews() {
     let { id, reviews } = this.state;
-    let reviewsOnDisplay = reviews.length;
     axios
       .get(`/reviews/${id}/more`)
       .then(({ data }) => this.setState({ reviews: [...reviews, ...data] }))
-      .then(() => this.setState({ reviewsOnDisplay }))
+      .then(() =>
+        this.setState({ reviewsOnDisplay: this.state.reviews.length })
+      )
       .catch(error => console.error(error));
   }
 

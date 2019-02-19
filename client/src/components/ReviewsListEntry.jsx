@@ -72,6 +72,8 @@ class ReviewsListEntry extends Component {
         <br />
         <br />
         <hr />
+        <br />
+        <br />
       </div>
     );
   }

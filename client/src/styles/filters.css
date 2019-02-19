@@ -47,6 +47,8 @@
   font-family: 'AdihausDIN-Bold';
   border-style: solid;
   border-color: #d9dcdd;
+  border-right: white;
+  border-left: white;
   color: #767677;
   border-width: 0.1px;
   width: 33%;
