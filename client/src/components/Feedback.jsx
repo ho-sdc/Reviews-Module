@@ -16,6 +16,7 @@ class Feedback extends Component {
   }
 
   componentWillReceiveProps() {
+    // console.log('From Feedback', this.props);
     this.calculatePercentage();
     this.getLength();
     this.getAverages();
@@ -31,6 +32,7 @@ class Feedback extends Component {
     });
 
     let percentage = Math.round((count / total) * 100);
+    // console.log('percentage', percentage);
     this.setState({ percentage });
   }
 
@@ -81,6 +83,8 @@ class Feedback extends Component {
   }
 
   render() {
+    // console.log('From Feedback2', this.props);
+
     let {
       sizePercentage,
       widthPercentage,

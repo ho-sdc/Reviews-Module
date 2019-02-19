@@ -11,9 +11,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 1,
-      reviewsOnDisplay: 2,
-      reviews: []
+      id: null,
+      reviews: [],
+      stats: [],
+      reviewsOnDisplay: 2
     };
     this.filterByRelevant = this.filterByRelevant.bind(this);
     this.filterByHelpful = this.filterByHelpful.bind(this);
@@ -26,12 +27,21 @@ class App extends Component {
   }
 
   onStartUp(id) {
+    this.setState({ id: id });
     axios
       .get(`/reviews/${id}`)
-      .then(({ data }) => this.setState({ reviews: data }))
-      .then(() => this.setState({ id }))
+      .then(({ data }) => {
+        this.setState({ reviews: data });
+      })
       .catch(error => console.error(error));
   }
+
+  // getStats(id) {
+  //   axios
+  //     .get(`/reviews/${id}/stats`)
+  //     .then(({ data }) => this.setState({ stats: data }))
+  //     .then(error => console.error(error));
+  // }
 
   filterByRelevant() {
     let { id, reviewsOnDisplay } = this.state;

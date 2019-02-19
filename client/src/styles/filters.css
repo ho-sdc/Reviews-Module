@@ -26,7 +26,8 @@
 .relevant {
   font-family: 'AdihausDIN-Bold';
   border-style: solid;
-  border-color: black;
+  border-color: #d9dcdd;
+  color: #767677;
   border-width: 0.1px;
   width: 33%;
   text-align: center;
@@ -35,12 +36,18 @@
   font-style: normal;
   font-size: 14px;
   letter-spacing: 2px;
+}
+
+.relevant:hover {
+  cursor: pointer;
+  color: black;
 }
 
 .helpful {
   font-family: 'AdihausDIN-Bold';
   border-style: solid;
-  border-color: black;
+  border-color: #d9dcdd;
+  color: #767677;
   border-width: 0.1px;
   width: 33%;
   text-align: center;
@@ -51,10 +58,16 @@
   letter-spacing: 2px;
 }
 
+.helpful:hover {
+  cursor: pointer;
+  color: black;
+}
+
 .newest {
   font-family: 'AdihausDIN-Bold';
   border-style: solid;
-  border-color: black;
+  border-color: #d9dcdd;
+  color: #767677;
   border-width: 0.1px;
   width: 33%;
   text-align: center;
@@ -63,4 +76,9 @@
   font-style: normal;
   font-size: 14px;
   letter-spacing: 2px;
+}
+
+.newest:hover {
+  cursor: pointer;
+  color: black;
 }

@@ -26,7 +26,7 @@ app.get('/reviews/:review_id/stats', (req, res) => {
   let { review_id } = req.params;
   Reviews.find({ review_id })
     .then(data => res.status(200).send(data))
-    .catch(error => res.status(404).send(error));
+    .catch(error => res.status(404).end(error));
 });
 
 app.get('/reviews/:review_id/total', (req, res) => {
