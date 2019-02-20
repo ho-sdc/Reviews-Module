@@ -94,6 +94,8 @@ class App extends Component {
               filterByNewest={this.filterByNewest}
             />
             <Reviews reviews={reviews} />
+            <br />
+            <br />
             <Buttons loadMoreReviews={this.loadMoreReviews} />
           </div>
         </div>

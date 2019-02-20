@@ -84,6 +84,7 @@ class Feedback extends Component {
 
   render() {
     let {
+      percentage,
       sizePercentage,
       widthPercentage,
       comfortPercentage,
@@ -93,7 +94,7 @@ class Feedback extends Component {
 
     return (
       <div>
-        <div className={styles.percentage}>{this.state.percentage}%</div>
+        <div className={styles.percentage}>{percentage}%</div>
         <div className={styles.description}>
           of customers recommend this product
         </div>
