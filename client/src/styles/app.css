@@ -17,23 +17,24 @@
   font-family: 'AdihausDIN-Bold';
   src: url('./fonts/AdihausDIN-Bold.woff2') format('woff2');
 }
-
+/* 
 .container {
   padding-left: 15%;
   padding-right: 15%;
-}
+} */
 
 .ratingsAndReviews {
   font-family: adineuePRO-Bold;
   font-weight: 600;
   font-size: 36px;
+  padding-left: 20px;
   padding-bottom: 70px;
 }
 
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .sortOn {

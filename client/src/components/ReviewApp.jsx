@@ -7,7 +7,7 @@ import styles from '../styles/app.css';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import axios from 'axios';
 
-class App extends Component {
+class ReviewApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,7 +83,7 @@ class App extends Component {
         <div className={styles.ratingsAndReviews}>RATINGS & REVIEWS</div>
         <div className={styles.row}>
           <div className={styles.leftContainer}>
-            <RatingBreakdown id={id} reviews={stats} />
+            <RatingBreakdown id={id} stats={stats} />
             <Feedback reviews={stats} />
           </div>
           <div>
@@ -104,4 +104,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default ReviewApp;
