@@ -4,11 +4,34 @@ import StarRatings from 'react-star-ratings';
 import axios from 'axios';
 import _ from 'lodash';
 
+let ShowFilters = props => {
+  return (
+    <div>
+      <div className={styles.showContainer}>
+        <div className={styles.showingReviews}>Showing reviews:</div>
+        <div className={styles.eachRating}>
+          {props.array.map((number, index) => {
+            return (
+              <div className={styles.individual} key={index}>
+                {number} STARS
+              </div>
+            );
+          })}
+        </div>
+        <div className={styles.remove} onClick={() => props.emptyFilters()}>
+          Remove all filters
+        </div>
+      </div>
+      <br />
+    </div>
+  );
+};
+
 class RatingBreakdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      array: ['Test'],
+      array: [],
       score: 0,
       max: 0,
       count: 0,
@@ -19,6 +42,7 @@ class RatingBreakdown extends Component {
       one: 0,
       filter: false
     };
+    this.emptyFilters = this.emptyFilters.bind(this);
   }
 
   componentWillReceiveProps() {
@@ -61,13 +85,45 @@ class RatingBreakdown extends Component {
     this.setState({ five, four, three, two, one, max });
   }
 
-  clickHandler() {
-    this.setState({ filter: !this.state.filter });
+  checkLength() {
+    let { array } = this.state;
+    if (array.length >= 1) {
+      this.setState({ filter: true });
+    } else if (array.length === 0) {
+      this.setState({ filter: false });
+    }
+  }
+
+  FilterSettings(number) {
+    let { array } = this.state;
+    if (!array.includes(number)) {
+      array.push(number);
+    } else {
+      let index = array.indexOf(number);
+      array.splice(index, 1);
+    }
+    this.setState({ array }, this.checkLength);
+  }
+
+  emptyFilters() {
+    this.setState({ array: [], filter: false });
   }
 
   render() {
-    let { score, count, max, five, four, three, two, one } = this.state;
+    let {
+      filter,
+      array,
+      score,
+      count,
+      max,
+      five,
+      four,
+      three,
+      two,
+      one
+    } = this.state;
 
+    console.log(array);
     return (
       <div>
         <div className={styles.scoreContainer}>
@@ -86,12 +142,17 @@ class RatingBreakdown extends Component {
           </div>
         </div>
         <div className={styles.ratingBreakdown}>RATING BREAKDOWN</div>
-        {this.state.filter ? <div>{this.state.array}</div> : null}
+        {filter ? (
+          <ShowFilters array={array} emptyFilters={this.emptyFilters} />
+        ) : null}
         <div>
           <div className={styles.progressBar}>
             <div
+              id={5}
               className={styles.starCategory}
-              onClick={() => this.clickHandler()}
+              onClick={e => {
+                this.FilterSettings(e.target.id);
+              }}
             >
               5 STARS
             </div>
@@ -100,8 +161,11 @@ class RatingBreakdown extends Component {
           </div>
           <div className={styles.progressBar}>
             <div
+              id={4}
               className={styles.starCategory}
-              onClick={() => this.clickHandler()}
+              onClick={e => {
+                this.FilterSettings(e.target.id);
+              }}
             >
               4 STARS
             </div>
@@ -109,17 +173,41 @@ class RatingBreakdown extends Component {
             <div className={styles.numOfReviews}>{four}</div>
           </div>
           <div className={styles.progressBar}>
-            <div className={styles.starCategory}>3 STARS</div>
+            <div
+              id={3}
+              className={styles.starCategory}
+              onClick={e => {
+                this.FilterSettings(e.target.id);
+              }}
+            >
+              3 STARS
+            </div>
             <progress value={three} max={max} />
             <div className={styles.numOfReviews}>{three}</div>
           </div>
           <div className={styles.progressBar}>
-            <div className={styles.starCategory}>2 STARS</div>
+            <div
+              id={2}
+              className={styles.starCategory}
+              onClick={e => {
+                this.FilterSettings(e.target.id);
+              }}
+            >
+              2 STARS
+            </div>
             <progress value={two} max={max} />
             <div className={styles.numOfReviews}>{two}</div>
           </div>
           <div className={styles.progressBar}>
-            <div className={styles.starCategory}>1 STARS</div>
+            <div
+              id={1}
+              className={styles.starCategory}
+              onClick={e => {
+                this.FilterSettings(e.target.id);
+              }}
+            >
+              1 STARS
+            </div>
             <progress value={one} max={max} />
             <div className={styles.numOfReviews}>{one}</div>
           </div>
