@@ -86,7 +86,8 @@ class ReviewApp extends Component {
             <RatingBreakdown id={id} stats={stats} />
             <Feedback reviews={stats} />
           </div>
-          <div>
+          <div className={styles.placeholder} />
+          <div className={styles.rightContainer}>
             <div className={styles.sortOn}>SORT ON</div>
             <Filters
               filterByHelpful={this.filterByHelpful}

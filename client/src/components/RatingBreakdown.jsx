@@ -1,31 +1,32 @@
 import React, { Component } from 'react';
+import RatingFilter from './RatingFilter.jsx';
 import styles from '../styles/ratingBreakdown.css';
 import StarRatings from 'react-star-ratings';
 import axios from 'axios';
 import _ from 'lodash';
 
-let ShowFilters = props => {
-  return (
-    <div>
-      <div className={styles.showContainer}>
-        <div className={styles.showingReviews}>Showing reviews:</div>
-        <div className={styles.eachRating}>
-          {props.array.map((number, index) => {
-            return (
-              <div className={styles.individual} key={index}>
-                {number} STARS
-              </div>
-            );
-          })}
-        </div>
-        <div className={styles.remove} onClick={() => props.emptyFilters()}>
-          Remove all filters
-        </div>
-      </div>
-      <br />
-    </div>
-  );
-};
+// let ShowFilters = props => {
+//   return (
+//     <div>
+//       <div className={styles.showContainer}>
+//         <div className={styles.showingReviews}>Showing reviews:</div>
+//         <div className={styles.eachRating}>
+//           {props.array.map((number, index) => {
+//             return (
+//               <div className={styles.individual} key={index}>
+//                 {number} STARS
+//               </div>
+//             );
+//           })}
+//         </div>
+//         <div className={styles.remove} onClick={() => props.emptyFilters()}>
+//           Remove all filters
+//         </div>
+//       </div>
+//       <br />
+//     </div>
+//   );
+// };
 
 class RatingBreakdown extends Component {
   constructor(props) {
@@ -123,7 +124,6 @@ class RatingBreakdown extends Component {
       one
     } = this.state;
 
-    console.log(array);
     return (
       <div>
         <div className={styles.scoreContainer}>
@@ -142,9 +142,11 @@ class RatingBreakdown extends Component {
           </div>
         </div>
         <div className={styles.ratingBreakdown}>RATING BREAKDOWN</div>
-        {filter ? (
-          <ShowFilters array={array} emptyFilters={this.emptyFilters} />
-        ) : null}
+        <div>
+          {filter ? (
+            <RatingFilter array={array} emptyFilters={this.emptyFilters} />
+          ) : null}
+        </div>
         <div>
           <div className={styles.progressBar}>
             <div
