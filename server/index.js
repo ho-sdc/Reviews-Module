@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('path');
 const parser = require('body-parser');
+const cors = require('cors');
 
-const port = 3000;
+const port = 3004;
 const app = express();
 
 const Reviews = require('../database/model.js');
@@ -10,6 +11,7 @@ const Reviews = require('../database/model.js');
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(cors());
 
 app.listen(port, () => console.log(`Listening on port ${port}.`));
 
@@ -67,7 +69,7 @@ app.get('/reviews/:review_id/newest/:n', (req, res) => {
 app.post('/reviews/:review_id/stars/:n', (req, res) => {
   let { review_id, n } = req.params;
   let { stars } = req.body;
-  let parsedStars = JSON.parse(stars).sort();
+  let parsedStars = stars.sort();
 
   let min = parsedStars[0];
   let max = parsedStars[parsedStars.length - 1];
