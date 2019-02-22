@@ -29,8 +29,8 @@ class ReviewApp extends Component {
 
   onStartUp(id) {
     Promise.all([
-      axios.get(`/reviews/${id}`),
-      axios.get(`/reviews/${id}/stats`)
+      axios.get(`http://localhost:3003/reviews/${id}`),
+      axios.get(`http://localhost:3003/reviews/${id}/stats`)
     ])
       .then(([data1, data2]) => {
         this.setState({
