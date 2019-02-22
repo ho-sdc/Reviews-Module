@@ -3,7 +3,7 @@ const path = require('path');
 const parser = require('body-parser');
 const cors = require('cors');
 
-const port = 3004;
+const port = 3003;
 const app = express();
 
 const Reviews = require('../database/model.js');
