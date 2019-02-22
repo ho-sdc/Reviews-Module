@@ -66,13 +66,12 @@ class ReviewApp extends Component {
       .then(({ data }) => this.setState({ reviews: data }))
       .catch(error => console.error(error));
   }
+
   /*FILTER BY STAR RATING */
   filterByStar(array) {
     let { id, reviewsOnDisplay } = this.state;
     axios
-      .post(`/reviews/${id}/stars/${reviewsOnDisplay}`, {
-        stars: JSON.stringify(array)
-      })
+      .post(`/reviews/${id}/stars/${reviewsOnDisplay}`, { stars: array })
       .then(({ data }) => this.setState({ reviews: data }))
       .catch(error => console.error(error));
   }
