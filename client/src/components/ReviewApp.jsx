@@ -20,6 +20,7 @@ class ReviewApp extends Component {
     this.filterByHelpful = this.filterByHelpful.bind(this);
     this.filterByNewest = this.filterByNewest.bind(this);
     this.loadMoreReviews = this.loadMoreReviews.bind(this);
+    this.filterByStar = this.filterByStar.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +42,7 @@ class ReviewApp extends Component {
       .catch(error => console.error(error));
   }
 
+  /*FIlTER BY RELEVANT, HELPFUL, NEWEST */
   filterByRelevant() {
     let { id, reviewsOnDisplay } = this.state;
     axios
@@ -64,7 +66,18 @@ class ReviewApp extends Component {
       .then(({ data }) => this.setState({ reviews: data }))
       .catch(error => console.error(error));
   }
+  /*FILTER BY STAR RATING */
+  filterByStar(array) {
+    let { id, reviewsOnDisplay } = this.state;
+    axios
+      .post(`/reviews/${id}/stars/${reviewsOnDisplay}`, {
+        stars: JSON.stringify(array)
+      })
+      .then(({ data }) => this.setState({ reviews: data }))
+      .catch(error => console.error(error));
+  }
 
+  /*PAGINATION - LOAD MORE REVIEWS */
   loadMoreReviews() {
     let { id, reviews } = this.state;
     axios
@@ -83,7 +96,11 @@ class ReviewApp extends Component {
         <div className={styles.ratingsAndReviews}>RATINGS & REVIEWS</div>
         <div className={styles.row}>
           <div className={styles.leftContainer}>
-            <RatingBreakdown id={id} stats={stats} />
+            <RatingBreakdown
+              id={id}
+              stats={stats}
+              filterByStar={this.filterByStar}
+            />
             <Feedback reviews={stats} />
           </div>
           <div className={styles.placeholder} />

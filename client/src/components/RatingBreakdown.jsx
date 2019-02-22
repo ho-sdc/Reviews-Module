@@ -5,29 +5,6 @@ import StarRatings from 'react-star-ratings';
 import axios from 'axios';
 import _ from 'lodash';
 
-// let ShowFilters = props => {
-//   return (
-//     <div>
-//       <div className={styles.showContainer}>
-//         <div className={styles.showingReviews}>Showing reviews:</div>
-//         <div className={styles.eachRating}>
-//           {props.array.map((number, index) => {
-//             return (
-//               <div className={styles.individual} key={index}>
-//                 {number} STARS
-//               </div>
-//             );
-//           })}
-//         </div>
-//         <div className={styles.remove} onClick={() => props.emptyFilters()}>
-//           Remove all filters
-//         </div>
-//       </div>
-//       <br />
-//     </div>
-//   );
-// };
-
 class RatingBreakdown extends Component {
   constructor(props) {
     super(props);
@@ -144,7 +121,11 @@ class RatingBreakdown extends Component {
         <div className={styles.ratingBreakdown}>RATING BREAKDOWN</div>
         <div>
           {filter ? (
-            <RatingFilter array={array} emptyFilters={this.emptyFilters} />
+            <RatingFilter
+              array={array}
+              emptyFilters={this.emptyFilters}
+              // filterByStar={this.props.filterByStar}
+            />
           ) : null}
         </div>
         <div>
@@ -154,6 +135,7 @@ class RatingBreakdown extends Component {
               className={styles.starCategory}
               onClick={e => {
                 this.FilterSettings(e.target.id);
+                this.props.filterByStar(array);
               }}
             >
               5 STARS
@@ -167,6 +149,7 @@ class RatingBreakdown extends Component {
               className={styles.starCategory}
               onClick={e => {
                 this.FilterSettings(e.target.id);
+                this.props.filterByStar(array);
               }}
             >
               4 STARS
@@ -180,6 +163,7 @@ class RatingBreakdown extends Component {
               className={styles.starCategory}
               onClick={e => {
                 this.FilterSettings(e.target.id);
+                this.props.filterByStar(array);
               }}
             >
               3 STARS
@@ -193,6 +177,7 @@ class RatingBreakdown extends Component {
               className={styles.starCategory}
               onClick={e => {
                 this.FilterSettings(e.target.id);
+                this.props.filterByStar(array);
               }}
             >
               2 STARS
@@ -206,6 +191,7 @@ class RatingBreakdown extends Component {
               className={styles.starCategory}
               onClick={e => {
                 this.FilterSettings(e.target.id);
+                this.props.filterByStar(array);
               }}
             >
               1 STARS
