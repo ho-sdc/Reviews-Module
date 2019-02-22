@@ -3,7 +3,7 @@ import Reviews from './Reviews.jsx';
 import Filters from './Filters.jsx';
 import Feedback from './Feedback.jsx';
 import Buttons from './Buttons.jsx';
-import styles from '../styles/app.css';
+import styles from '../styles/reviewApp.css';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import axios from 'axios';
 
@@ -42,7 +42,7 @@ class ReviewApp extends Component {
       .catch(error => console.error(error));
   }
 
-  /*FIlTER BY RELEVANT, HELPFUL, NEWEST */
+  /* FIlTER BY RELEVANT, HELPFUL, NEWEST */
   filterByRelevant() {
     let { id, reviewsOnDisplay } = this.state;
     axios
@@ -67,7 +67,7 @@ class ReviewApp extends Component {
       .catch(error => console.error(error));
   }
 
-  /*FILTER BY STAR RATING */
+  /* FILTER BY STAR RATING */
   filterByStar(array) {
     let { id, reviewsOnDisplay } = this.state;
     axios
@@ -76,7 +76,7 @@ class ReviewApp extends Component {
       .catch(error => console.error(error));
   }
 
-  /*PAGINATION - LOAD MORE REVIEWS */
+  /* PAGINATION - LOAD MORE REVIEWS */
   loadMoreReviews() {
     let { id, reviews } = this.state;
     axios
