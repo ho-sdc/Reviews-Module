@@ -15,18 +15,18 @@ app.use(cors());
 
 app.listen(port, () => console.log(`Listening on port ${port}.`));
 
-app.get('/reviews/', (req, res) => {
-  let { id } = req.query;
-  Reviews.find({ review_id: id })
+app.get('/reviews/:review_id', (req, res) => {
+  let { review_id } = req.params;
+  Reviews.find({ review_id })
     .sort({ review_id: 1 })
     .limit(2)
     .then(data => res.status(200).send(data))
     .catch(error => res.status(404).send(error));
 });
 
-app.get('/reviews/stats', (req, res) => {
-  let { id } = req.query;
-  Reviews.find({ review_id: id })
+app.get('/reviews/:review_id/stats', (req, res) => {
+  let { review_id } = req.params;
+  Reviews.find({ review_id })
     .then(data => res.status(200).send(data))
     .catch(error => res.status(404).end(error));
 });
