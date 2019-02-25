@@ -28,7 +28,7 @@ class ReviewApp extends Component {
   }
 
   onStartUp() {
-    Promise.all([axios.get(`/reviews/`), axios.get(`/reviews/stats`)])
+    Promise.all([axios.get('/reviews'), axios.get('/reviews/stats')])
       .then(([data1, data2]) => {
         this.setState({
           id: data1.data[0].review_id,
