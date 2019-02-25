@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import RatingFilter from './RatingFilter.jsx';
 import styles from '../styles/ratingBreakdown.css';
 import StarRatings from 'react-star-ratings';
-import axios from 'axios';
 import _ from 'lodash';
 
 class RatingBreakdown extends Component {
@@ -12,7 +11,6 @@ class RatingBreakdown extends Component {
       array: [],
       score: 0,
       max: 0,
-      count: 0,
       five: 0,
       four: 0,
       three: 0,
@@ -25,17 +23,9 @@ class RatingBreakdown extends Component {
 
   componentWillReceiveProps() {
     setTimeout(() => {
-      this.fetchReviewCount();
       this.meter();
       this.calculateAverage();
     }, 0);
-  }
-
-  fetchReviewCount() {
-    axios
-      .get(`/reviews/${this.props.id}/total`)
-      .then(({ data }) => this.setState({ count: data }))
-      .catch(error => console.error(error));
   }
 
   filterReviewScores(n, array) {
@@ -88,18 +78,7 @@ class RatingBreakdown extends Component {
   }
 
   render() {
-    let {
-      filter,
-      array,
-      score,
-      count,
-      max,
-      five,
-      four,
-      three,
-      two,
-      one
-    } = this.state;
+    let { filter, array, score, max, five, four, three, two, one } = this.state;
 
     return (
       <div>
@@ -113,7 +92,9 @@ class RatingBreakdown extends Component {
               starRatedColor="black"
             />
             <div className={styles.reviews}>
-              <div className={styles.reviewsNumber}>{count}</div>
+              <div className={styles.reviewsNumber}>
+                {this.props.stats.length}
+              </div>
               <div className={styles.reviewsTag}>Reviews</div>
             </div>
           </div>
@@ -121,11 +102,7 @@ class RatingBreakdown extends Component {
         <div className={styles.ratingBreakdown}>RATING BREAKDOWN</div>
         <div>
           {filter ? (
-            <RatingFilter
-              array={array}
-              emptyFilters={this.emptyFilters}
-              // filterByStar={this.props.filterByStar}
-            />
+            <RatingFilter array={array} emptyFilters={this.emptyFilters} />
           ) : null}
         </div>
         <div>
