@@ -23,7 +23,7 @@ app.get('/reviews', (req, res) => {
     .catch(error => res.status(404).send(error));
 });
 
-app.get('/reviews/:review_id/stats', (req, res) => {
+app.get('/reviews/stats', (req, res) => {
   let { id } = req.query;
   Reviews.find({ review_id: id })
     .then(data => res.status(200).send(data))
