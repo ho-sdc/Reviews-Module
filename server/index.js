@@ -17,7 +17,8 @@ app.listen(port, () => console.log(`Listening on port ${port}.`));
 
 app.get('/reviews', (req, res) => {
   let { id } = req.query;
-  Reviews.find({ review_id: id })
+  console.log('reached req', id)
+  Reviews.find({ productId: id })
     .limit(2)
     .then(data => res.status(200).send(data))
     .catch(error => res.status(404).send(error));
@@ -25,40 +26,40 @@ app.get('/reviews', (req, res) => {
 
 app.get('/reviews/stats', (req, res) => {
   let { id } = req.query;
-  Reviews.find({ review_id: id })
+  Reviews.find({ productId: id })
     .then(data => res.status(200).send(data))
     .catch(error => res.status(404).end(error));
 });
 
-app.get('/reviews/:review_id/helpful/:n', (req, res) => {
-  let { review_id, n } = req.params;
-  Reviews.find({ review_id })
+app.get('/reviews/:productId/helpful/:n', (req, res) => {
+  let { productId, n } = req.params;
+  Reviews.find({ productId })
     .$where('this.yes > this.nope')
     .limit(JSON.parse(n))
     .then(data => res.status(200).send(data))
     .catch(error => res.status(404).end(error));
 });
 
-app.get('/reviews/:review_id/relevant/:n', (req, res) => {
-  let { review_id, n } = req.params;
-  Reviews.find({ review_id })
+app.get('/reviews/:productId/relevant/:n', (req, res) => {
+  let { productId, n } = req.params;
+  Reviews.find({ productId })
     .$where('this.yes + this.nope >= 110')
     .limit(JSON.parse(n))
     .then(data => res.status(200).send(data))
     .catch(error => res.status(404).end(error));
 });
 
-app.get('/reviews/:review_id/newest/:n', (req, res) => {
-  let { review_id, n } = req.params;
-  Reviews.find({ review_id })
+app.get('/reviews/:productId/newest/:n', (req, res) => {
+  let { productId, n } = req.params;
+  Reviews.find({ productId })
     .sort({ date: -1 })
     .limit(JSON.parse(n))
     .then(data => res.status(200).send(data))
     .catch(error => res.status(404).end(error));
 });
 
-app.post('/reviews/:review_id/stars/:n', (req, res) => {
-  let { review_id, n } = req.params;
+app.post('/reviews/:productId/stars/:n', (req, res) => {
+  let { productId, n } = req.params;
   let { stars } = req.body;
   let parsedStars = stars.sort();
 
@@ -66,8 +67,8 @@ app.post('/reviews/:review_id/stars/:n', (req, res) => {
   let max = parsedStars[parsedStars.length - 1];
 
   Reviews.find({})
-    .where('review_id')
-    .equals(review_id)
+    .where('productId')
+    .equals(productId)
     .where('rating')
     .gte(min)
     .lte(max)
@@ -77,9 +78,9 @@ app.post('/reviews/:review_id/stars/:n', (req, res) => {
     .catch(error => res.status(404).end(error));
 });
 
-app.get('/reviews/:review_id/more', (req, res) => {
-  let { review_id } = req.params;
-  Reviews.find({ review_id })
+app.get('/reviews/:productId/more', (req, res) => {
+  let { productId } = req.params;
+  Reviews.find({ productId })
     .limit(5)
     .then(data => res.status(200).send(data))
     .catch(error => res.status(404).send(error));

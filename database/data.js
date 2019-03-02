@@ -39,16 +39,19 @@ generateReviews = () => {
 for ( let x = 0 ; x < 1; x++) {
   let writeStream = fs.createWriteStream(`./dataSet/data.csv`)
   
-  function writeTenMillion(writer, callback) {
-    let i = 0
+  function writeTenMillion(writer, data, callback) {
+    let i = 10000000
+    let j = 0
     function write () {
       let ok = true;
       do {
-        i++;
-        if ( i === 10000000 ){
-          writer.write( JSON.stringify({productId: i, reviews: generateReviews()}), callback);
+        i--;
+        j++;
+        let store = JSON.stringify({productId: j, reviews: data()})
+        if ( i === 0 ){
+          writer.write( store, callback);
         } else {
-          ok = writer.write(JSON.stringify({productId: i, reviews: generateReviews()}));
+          ok = writer.write(store);
         }
       } while (i > 0 && ok);
       if (i > 0){
