@@ -1,12 +1,10 @@
 const db = require('./model.js');
 const faker = require('faker');
-// const {Writable} = require('stream'); 
 const fs = require('fs')
 
 const {
   descriptionGenerator,
   headerGenerator,
-  idGenerator,
   fiveStarGenerator,
   dateGenerator,
   recommendGen,

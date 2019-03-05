@@ -6,7 +6,8 @@ const cors = require('cors');
 const port = 3003;
 const app = express();
 
-const Reviews = require('../database/model.js');
+// const Reviews = require('../database/mongodb/model.js');
+const Reviews = require('../database/postgres/model.js')
 
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
@@ -15,20 +16,30 @@ app.use(cors());
 
 app.listen(port, () => console.log(`Listening on port ${port}.`));
 
-app.get('/reviews', (req, res) => {
-  let { id } = req.query;
-  console.log('reached req', id)
-  Reviews.find({ productId: id })
-    .limit(2)
-    .then(data => res.status(200).send(data))
-    .catch(error => res.status(404).send(error));
-});
+// app.get('/reviews', (req, res) => {
+//   let { id } = req.query;
+//   console.log('reached req', id)
+//   console.time('reviews')
+//   Reviews.find({ productId: id })
+//     .then(data => 
+//       {
+//         console.timeEnd('reviews')
+//         res.status(200).send(data)
+//       })
+//     .catch(error => res.status(404).send(error));
+// });
 
-app.get('/reviews/stats', (req, res) => {
-  let { id } = req.query;
-  Reviews.find({ productId: id })
-    .then(data => res.status(200).send(data))
-    .catch(error => res.status(404).end(error));
+app.get('/reviews/:id', (req, res) => {
+  let { id } = req.params;
+  console.log('reached req', id)
+  console.time('reviews')
+  Reviews.findAll({ where: {reviewid: id} })
+    .then(data => 
+      {
+        console.timeEnd('reviews')
+        res.status(200).send(data)
+      })
+    .catch(error => res.status(404).send(error));
 });
 
 app.get('/reviews/:productId/helpful/:n', (req, res) => {
