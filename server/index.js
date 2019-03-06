@@ -6,8 +6,8 @@ const cors = require('cors');
 const port = 3003;
 const app = express();
 
-// const Reviews = require('../database/mongodb/model.js');
-const Reviews = require('../database/postgres/model.js')
+const Reviews = require('../database/mongodb/model.js');
+// const Reviews = require('../database/postgres/model.js')
 
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
@@ -16,11 +16,64 @@ app.use(cors());
 
 app.listen(port, () => console.log(`Listening on port ${port}.`));
 
-// app.get('/reviews', (req, res) => {
-//   let { id } = req.query;
+app.get('/reviews', (req, res) => {
+  let { id } = req.query;
+  console.time('get')
+  Reviews.find({ productId: id })
+    .then(data => 
+      {
+        console.timeEnd('get')
+        res.status(200).send(data)
+      })
+    .catch(error => res.status(404).send(error));
+});
+
+app.post('/reviews', (req, res) => {
+  let data = req.body
+  console.log(req.body)
+  console.time('post')
+  new Reviews({
+    productId: data.productId,
+    reviews: data.reviews
+  }).save()
+  .then(() => {
+    console.timeEnd('post')
+    res.status(201).send()
+  })
+  .catch(() => {res.status(404).send()})
+})
+
+app.delete('/reviews', (req, res) => {
+  let { id } = req.query
+  console.time('delete')
+  Reviews.deleteOne({ productId: id })
+  .then(() => { 
+    console.timeEnd('delete')
+    res.status(204).send()
+  })
+  .catch(() => { res.status(404).send() })
+})
+
+app.patch('/reviews', (req, res) => {
+  let { id } = req.query
+  let data = req.body;
+  console.log(data.reviews)  
+  console.log(id)
+  console.time('update')
+  Reviews.updateOne( {productId: id} , { reviews: data.reviews} )
+  .then(() => {
+    console.timeEnd('update')
+    res.status(204).send()
+  })
+  .catch(() => {res.status(404).send()})
+})
+
+// postgres get request
+// app.get('/reviews/:id', (req, res) => {
+//   let { id } = req.params;
 //   console.log('reached req', id)
 //   console.time('reviews')
-//   Reviews.find({ productId: id })
+//   Reviews.findAll({ where: {reviewid: id} })
 //     .then(data => 
 //       {
 //         console.timeEnd('reviews')
@@ -28,19 +81,6 @@ app.listen(port, () => console.log(`Listening on port ${port}.`));
 //       })
 //     .catch(error => res.status(404).send(error));
 // });
-
-app.get('/reviews/:id', (req, res) => {
-  let { id } = req.params;
-  console.log('reached req', id)
-  console.time('reviews')
-  Reviews.findAll({ where: {reviewid: id} })
-    .then(data => 
-      {
-        console.timeEnd('reviews')
-        res.status(200).send(data)
-      })
-    .catch(error => res.status(404).send(error));
-});
 
 app.get('/reviews/:productId/helpful/:n', (req, res) => {
   let { productId, n } = req.params;
@@ -50,6 +90,7 @@ app.get('/reviews/:productId/helpful/:n', (req, res) => {
     .then(data => res.status(200).send(data))
     .catch(error => res.status(404).end(error));
 });
+
 
 app.get('/reviews/:productId/relevant/:n', (req, res) => {
   let { productId, n } = req.params;
