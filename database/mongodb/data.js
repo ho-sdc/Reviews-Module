@@ -45,7 +45,7 @@ for ( let x = 0 ; x < 1; x++) {
       do {
         i--;
         j++;
-        let store = JSON.stringify({productId: j, reviews: data()})
+        let store = JSON.stringify({productId: j, productName: faker.commerce.product() + j, reviews: data()})
         if ( i === 0 ){
           writer.write( store, callback);
         } else {

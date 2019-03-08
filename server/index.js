@@ -16,8 +16,8 @@ app.use(cors());
 
 app.listen(port, () => console.log(`Listening on port ${port}.`));
 
-app.get('/reviews', (req, res) => {
-  let { id } = req.query;
+app.get('/reviews/:id', (req, res) => {
+  let { id } = req.params;
   console.time('get')
   Reviews.find({ productId: id })
     .then(data => 
