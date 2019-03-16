@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "nodemon server/index.js",
     "build": "webpack -d --watch",
     "seed": "node database/data.js"
@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/team-barium/Reviews-Module#readme",
   "dependencies": {
+    "artillery": "^1.6.0-27",
     "axios": "^0.18.0",
+    "babel-jest": "^24.1.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "css-loader": "^2.1.0",
@@ -30,23 +32,30 @@
     "file-loader": "^3.0.1",
     "lodash": "^4.17.11",
     "lorem-ipsum": "^1.0.6",
-    "mongoose": "^5.4.10",
-    "nodemon": "^1.18.9",
+    "mongoose": "^5.4.17",
+    "newrelic": "^5.6.1",
+    "nodemon": "^1.18.10",
     "pg": "^7.8.1",
     "react-star-ratings": "^2.3.0",
-    "sequelize": "^4.42.1",
+    "redis": "^2.8.0",
+    "sequelize": "^4.43.0",
     "stream": "0.0.2",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "webpack": "^4.29.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   }
 }

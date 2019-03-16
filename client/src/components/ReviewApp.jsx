@@ -28,12 +28,11 @@ class ReviewApp extends Component {
   }
 
   onStartUp() {
-    Promise.all([axios.get('/reviews'), axios.get('/reviews/stats')])
+    Promise.all([axios.get('/reviews')])
       .then(([data1, data2]) => {
         this.setState({
-          id: data1.data[0].review_id,
-          reviews: data1.data,
-          stats: data2.data
+          id: data1.data.productId,
+          reviews: data1.data.reviews
         });
       })
       .catch(error => console.error(error));
@@ -78,7 +77,7 @@ class ReviewApp extends Component {
     let { id, reviews } = this.state;
     axios
       .get(`/reviews/${id}/more`)
-      .then(({ data }) => this.setState({ reviews: [...reviews, ...data] }))
+      .then(( data ) => {console.log(data); this.setState({ reviews: [...reviews, ...data] })})
       .then(() =>
         this.setState({ reviewsOnDisplay: this.state.reviews.length })
       )
